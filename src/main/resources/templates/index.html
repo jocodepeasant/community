@@ -34,7 +34,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li th:if="${session.GithubUser ==null}"><a href="https://github.com/login/oauth/authorize?client_id=2891fa698a9bf3f5843a">登录</a></li>
                 <li th:if="${session.GithubUser !=null}" class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">我 <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><th:block th:text="${session.GithubUser.getName()}"/><span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">Action</a></li>
                         <li><a href="#">Another action</a></li>
