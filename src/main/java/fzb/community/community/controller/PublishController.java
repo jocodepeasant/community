@@ -2,13 +2,25 @@ package fzb.community.community.controller;
 
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class PublishController {
 
-    @RequestMapping("/publish")
-    public String publish(){
+    @GetMapping("/publish")
+    public String publish() {
+        return "publish";
+    }
+
+    @PostMapping("/publish")
+    public String doPublish(@RequestParam(name = "title") String title,
+                            @RequestParam(name = "text") String text,
+                            @RequestParam(name = "tag") String tag,
+                            HttpServletRequest request){
+
         return "publish";
     }
 }
