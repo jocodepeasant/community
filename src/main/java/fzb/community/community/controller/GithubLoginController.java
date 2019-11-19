@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -66,6 +67,24 @@ public class GithubLoginController {
             Cookie cookie = new Cookie("GithubToken", user.getToken());
             cookie.setMaxAge(60 * 60 * 24 * 30 * 6);
             response.addCookie(cookie);
+        }
+        return "redirect:/";
+    }
+
+    @RequestMapping("/loginOut")
+    public String loginOut(HttpServletRequest request,
+                           HttpServletResponse response) {
+        request.getSession().removeAttribute("GithubUser");
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies
+            ) {
+                if (cookie.getName().equals("GithubToken")) {
+                    cookie.setMaxAge(0);
+                    response.addCookie(cookie);
+                    break;
+                }
+            }
         }
         return "redirect:/";
     }

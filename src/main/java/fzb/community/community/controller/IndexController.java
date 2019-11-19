@@ -2,6 +2,7 @@ package fzb.community.community.controller;
 
 import fzb.community.community.mapper.UserMapper;
 import fzb.community.community.model.User;
+import fzb.community.community.service.UserService;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
@@ -18,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 public class IndexController {
 
     @Autowired
-    private UserMapper userMapper;
+    private UserService userService;
 
     @GetMapping("/")
     public String hello(HttpServletRequest request) {
@@ -28,7 +29,7 @@ public class IndexController {
             for (Cookie cookie : cookies
             ) {
                 if (cookie.getName().equals("GithubToken") ) {
-                    user = userMapper.findByToken(cookie.getValue());
+                    user = userService.findByToken(cookie.getValue());
                     break;
                 }
             }
