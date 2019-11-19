@@ -12,9 +12,9 @@ public class UserService {
     private UserMapper userMapper;
 
     public void InsertOrUpdate(User user){
-        User byToken = userMapper.findByToken(user.getToken());
-        if (byToken!=null){
-            userMapper.Update(user.getName(),user.getGmtModified());
+        User byId = userMapper.findById(user.getAccountId());
+        if (byId!=null){
+            userMapper.Update(user);
         }
         else {
             userMapper.insert(user);

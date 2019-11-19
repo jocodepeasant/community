@@ -18,6 +18,8 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class IndexController {
 
+    static int a;
+
     @Autowired
     private UserService userService;
 
@@ -34,7 +36,7 @@ public class IndexController {
                 }
             }
         }
-        if (user.getToken()!=null){
+        if (user!=null && user.getToken()!=null){
             request.getSession().setAttribute("GithubUser",user);
         }
         return "index";

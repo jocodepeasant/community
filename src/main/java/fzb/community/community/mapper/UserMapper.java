@@ -11,10 +11,13 @@ public interface UserMapper {
     @Insert("insert into user (account_id,name,token,gmt_create,gmt_modified) values(#{accountId},#{name},#{token},#{gmtCreate},#{gmtModified})")
     void insert(User user);
 
+    @Select("select * from user where account_id=#{accountId}")
+    User findById(String accountId);
+
     @Select("select * from user where token=#{token}")
     User findByToken(String token);
 
-    @Update("update user set name=#{name},gmt_modified=#{modified}")
-    void Update(String name,Long modified);
+    @Update("update user set name=#{name},gmt_modified=#{gmtModified},token=#{token}")
+    void Update(User user);
 }
 
