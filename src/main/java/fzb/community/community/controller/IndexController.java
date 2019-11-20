@@ -1,6 +1,8 @@
 package fzb.community.community.controller;
 
+import fzb.community.community.mapper.QuestionMapper;
 import fzb.community.community.mapper.UserMapper;
+import fzb.community.community.model.Question;
 import fzb.community.community.model.User;
 import fzb.community.community.service.UserService;
 import okhttp3.Request;
@@ -21,6 +23,9 @@ public class IndexController {
     static int a;
 
     @Autowired
+    private QuestionMapper questionMapper;
+
+    @Autowired
     private UserService userService;
 
     @GetMapping("/")
@@ -39,6 +44,9 @@ public class IndexController {
         if (user!=null && user.getToken()!=null){
             request.getSession().setAttribute("GithubUser",user);
         }
+
+        /*Question question = questionMapper.findAll();
+        request.setAttribute("question",question);*/
         return "index";
     }
 }

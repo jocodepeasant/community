@@ -56,20 +56,21 @@
             发起
         </h2>
         <hr>
-        <form>
+        <form action="/publish" method="post">
             <div class="form-group">
                 <label for="title">问题标题（简单扼要）:</label>
-                <input type="text" class="form-control" id="title" placeholder="问题标题......">
+                <input type="text" class="form-control" id="title"  name="title"  placeholder="问题标题......" th:value="${#httpServletRequest.getAttribute('title')}">
             </div>
             <div class="form-group">
-                <label for="text">问题补充(必填,请参照右侧提示）</label>
-                <textarea id="text" rows="10" cols="30" class="form-control"></textarea>
+                <label for="description">问题补充(必填,请参照右侧提示）</label>
+                <textarea  id="description" name="description" rows="10" cols="30" class="form-control" th:text="${#httpServletRequest.getAttribute('description')}"></textarea>
             </div>
             <div class="form-group">
                 <label for="tag">添加标签：</label>
                 <br>
-                <input type="text" id="tag" placeholder="输入标签，以，号分隔" class="form-control">
+                <input type="text" id="tag" name="tag" placeholder="输入标签，以，号分隔" class="form-control" th:value="${#httpServletRequest.getAttribute('tag')}">
             </div>
+            <div th:if="${#httpServletRequest.getAttribute('msg') !=null}" class="alert alert-danger" role="alert"><th:block th:text="${#httpServletRequest.getAttribute('msg')}"></th:block></div>
             <button type="submit" class="btn btn-default btn-publish btn btn-success" >发布</button>
         </form>
     </div>
