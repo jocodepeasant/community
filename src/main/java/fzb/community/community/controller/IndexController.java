@@ -1,15 +1,11 @@
 package fzb.community.community.controller;
 
 import fzb.community.community.dto.PaginationDTO;
-import fzb.community.community.mapper.QuestionMapper;
-import fzb.community.community.mapper.UserMapper;
-import fzb.community.community.model.Question;
+import fzb.community.community.dto.QuestionDTO;
 import fzb.community.community.model.User;
 import fzb.community.community.service.IndexService;
+import fzb.community.community.service.PaginationService;
 import fzb.community.community.service.UserService;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,10 +27,15 @@ public class IndexController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private PaginationService paginationService;
+
     @GetMapping("/")
     public String hello(HttpServletRequest request,
-                        Model model) {
-        Cookie[] cookies = request.getCookies();
+                        Model model,
+                        @RequestParam(name = "page",defaultValue = "1") Integer page,
+                        @RequestParam(name="size",defaultValue = "10") Integer size) {
+        /*Cookie[] cookies = request.getCookies();
         User user=new User();
         if (cookies!=null) {
             for (Cookie cookie : cookies
@@ -47,9 +48,13 @@ public class IndexController {
         }
         if (user!=null && user.getToken()!=null){
             request.getSession().setAttribute("GithubUser",user);
-        }
-        List<PaginationDTO> list = indexService.list();
+        }*/
+        List<QuestionDTO> list = indexService.list(page,size);
         model.addAttribute("list", list);
+
+        PaginationDTO pagination = paginationService.pagination(page);
+        model.addAttribute("pagination", pagination);
+
         return "index";
     }
 }

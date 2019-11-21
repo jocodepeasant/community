@@ -2,23 +2,18 @@ package fzb.community.community.controller;
 
 import fzb.community.community.dto.AccessTokenDTO;
 import fzb.community.community.dto.GithubUser;
-import fzb.community.community.dto.PaginationDTO;
-import fzb.community.community.mapper.UserMapper;
 import fzb.community.community.model.User;
 import fzb.community.community.provider.GithubProvider;
 import fzb.community.community.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Enumeration;
 import java.util.UUID;
 
 @Controller
@@ -80,7 +75,7 @@ public class GithubLoginController {
         if (cookies != null) {
             for (Cookie cookie : cookies
             ) {
-                if (cookie.getName().equals("GithubToken")) {
+            if (cookie.getName().equals("GithubToken")) {
                     cookie.setMaxAge(0);
                     response.addCookie(cookie);
                     break;

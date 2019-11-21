@@ -1,15 +1,14 @@
 package fzb.community.community.controller;
 
-import fzb.community.community.dto.GithubUser;
 import fzb.community.community.model.Question;
 import fzb.community.community.model.User;
 import fzb.community.community.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -20,7 +19,11 @@ public class PublishController {
     private QuestionService questionService;
 
     @GetMapping("/publish")
-    public String publish() {
+    public String publish(HttpServletRequest request,Model model) {
+        User user= (User) request.getSession().getAttribute("GithubUser");
+        if (user==null || user.getId()==null){
+            model.addAttribute("msg", "用户未登录，请先登录");
+        }
         return "publish";
     }
 

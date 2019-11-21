@@ -4,8 +4,6 @@ import fzb.community.community.model.Question;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -17,4 +15,18 @@ public interface QuestionMapper {
 
     @Select("select * from question")
     List<Question> findAll();
+
+    /**
+     * 总问题数
+     *
+     * @return
+     */
+    @Select("select count(1) from question")
+    public int total();
+
+    @Select("select * from question limit #{index},#{size}")
+    List<Question> findPageAll(Integer index, Integer size);
+
+    @Select("select * from question where creator=#{creator}")
+    List<Question> findByCreator();
 }

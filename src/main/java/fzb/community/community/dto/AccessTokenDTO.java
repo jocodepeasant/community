@@ -1,7 +1,6 @@
 package fzb.community.community.dto;
 
 import lombok.Data;
-import org.springframework.stereotype.Repository;
 
 /**
  * 

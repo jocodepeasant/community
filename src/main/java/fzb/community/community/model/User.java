@@ -2,9 +2,6 @@ package fzb.community.community.model;
 
 import lombok.Data;
 
-import javax.persistence.Id;
-import javax.persistence.Table;
-
 @Data
 public class User {
     private Long id;
