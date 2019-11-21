@@ -3,12 +3,12 @@
 <head>
     <title>互动社区</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/bootstrap-theme.css" rel="stylesheet">
-    <link href="css/community.css" rel="stylesheet">
-    <script src="js/jquery-3.4.1.min.js">
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/bootstrap-theme.css" rel="stylesheet">
+    <link href="/css/community.css" rel="stylesheet">
+    <script src="/js/jquery-3.4.1.min.js">
     </script>
-    <script src="js/bootstrap.js" type="text/javascript"></script>
+    <script src="/js/bootstrap.js" type="text/javascript"></script>
 </head>
 <body>
 <div th:insert="~{navigation :: nav}"></div>
@@ -26,7 +26,7 @@
             <li role="presentation"><a href="#">最热</a></li>
             <li role="presentation"><a href="#" style="color: red !important;">消灭零回复</a></li>
         </ul>
-        <div class="media" th:each="question : ${list}">
+        <div class="media" th:each="question : ${questions}">
             <div class="media-left">
                 <a href="#">
                     <img class="media-object img-rounded"
@@ -42,7 +42,7 @@
                         th:text="${#dates.format(question.gmtCreate,'yyyy-MM-dd HH:mm')}"></span></span>
             </div>
         </div>
-        <nav>
+        <!--<nav>
             <ul class="pagination">
                 <li th:if="${pagination.showFirstPage}"><a  th:href="@{/(page=1)}" aria-label="Previous"><span aria-hidden="true" >&lt;&lt;</span></a></li>
                 <li th:if="${pagination.showPrevious}"><a th:href="@{/(page=${pagination.page}-1)}" aria-label="Previous"><span aria-hidden="true">&lt;</span></a></li>
@@ -50,16 +50,13 @@
                 <li th:if="${pagination.showNext}"><a th:href="@{/(page=${pagination.page}+1)}" aria-label="Previous"><span aria-hidden="true">&gt;</span></a></li>
                 <li th:if="${pagination.showEndPage}"><a th:href="@{/(page=${pagination.getTotalPage()})}" aria-label="Previous"><span aria-hidden="true">&gt;&gt;</span></a></li>
             </ul>
-        </nav>
+        </nav>-->
     </div>
     <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
-        <h3>问题发起指南</h3>
-        <br>
-        • 问题标题: 请用精简的语言描述您发布的问题，不超过25字
-        <br>
-        • 问题补充: 详细补充您的问题内容，并确保问题描述清晰直观, 并提供一些相关的资料
-        <br>
-        • 选择标签: 选择一个或者多个合适的标签，用逗号隔开，每个标签不超过10个字
+        <div class="list-group right-own">
+            <a href="#" class="list-group-item active">我的问题</a>
+            <a href="#" class="list-group-item">最新回复 <span class="badge">14</span></a>
+        </div>
     </div>
 </div>
 </body>

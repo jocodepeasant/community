@@ -28,5 +28,5 @@ public interface QuestionMapper {
     List<Question> findPageAll(Integer index, Integer size);
 
     @Select("select * from question where creator=#{creator}")
-    List<Question> findByCreator();
+    List<Question> findByCreator(Long creator);
 }

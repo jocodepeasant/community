@@ -30,7 +30,7 @@ public class QuestionService {
 
     public List<QuestionDTO> findQuestionsByCreator(Long creator){
                 List<QuestionDTO> questionDTOS=new ArrayList<>();
-                List<Question> byCreator = questionMapper.findByCreator();
+                List<Question> byCreator = questionMapper.findByCreator(creator);
                 User byId = userMapper.findById(creator);
                 for (Question question:byCreator
                 ) {

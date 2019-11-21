@@ -28,7 +28,7 @@ public class PublishController {
     }
 
     @PostMapping("/publish")
-    public String doPublish(@RequestParam(name = "title",required = false) String title,
+                                                                                                                                                                public String doPublish(@RequestParam(name = "title",required = false) String title,
                             @RequestParam(name = "description",required = false) String description,
                             @RequestParam(name = "tag",required = false) String tag,
                             HttpServletRequest request,
