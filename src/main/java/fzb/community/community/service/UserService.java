@@ -12,7 +12,7 @@ public class UserService {
     private UserMapper userMapper;
 
     public void InsertOrUpdate(User user){
-        User byId = userMapper.findById(user.getAccountId());
+        User byId = userMapper.findByAccountId(user.getAccountId());
         if (byId!=null){
             userMapper.Update(user);
         }

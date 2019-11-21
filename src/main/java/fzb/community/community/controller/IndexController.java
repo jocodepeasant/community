@@ -1,9 +1,11 @@
 package fzb.community.community.controller;
 
+import fzb.community.community.dto.PaginationDTO;
 import fzb.community.community.mapper.QuestionMapper;
 import fzb.community.community.mapper.UserMapper;
 import fzb.community.community.model.Question;
 import fzb.community.community.model.User;
+import fzb.community.community.service.IndexService;
 import fzb.community.community.service.UserService;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 public class IndexController {
@@ -23,13 +26,14 @@ public class IndexController {
     static int a;
 
     @Autowired
-    private QuestionMapper questionMapper;
+    private IndexService indexService;
 
     @Autowired
     private UserService userService;
 
     @GetMapping("/")
-    public String hello(HttpServletRequest request) {
+    public String hello(HttpServletRequest request,
+                        Model model) {
         Cookie[] cookies = request.getCookies();
         User user=new User();
         if (cookies!=null) {
@@ -44,9 +48,8 @@ public class IndexController {
         if (user!=null && user.getToken()!=null){
             request.getSession().setAttribute("GithubUser",user);
         }
-
-        /*Question question = questionMapper.findAll();
-        request.setAttribute("question",question);*/
+        List<PaginationDTO> list = indexService.list();
+        model.addAttribute("list", list);
         return "index";
     }
 }

@@ -2,6 +2,7 @@ package fzb.community.community.controller;
 
 import fzb.community.community.dto.AccessTokenDTO;
 import fzb.community.community.dto.GithubUser;
+import fzb.community.community.dto.PaginationDTO;
 import fzb.community.community.mapper.UserMapper;
 import fzb.community.community.model.User;
 import fzb.community.community.provider.GithubProvider;

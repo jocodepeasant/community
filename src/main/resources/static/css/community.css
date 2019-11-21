@@ -9,3 +9,7 @@ body{
     float: right;
     margin-bottom: 15px;
 }
+.media-object {
+    height: 38px;
+    width: 38px;
+}
