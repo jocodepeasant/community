@@ -5,12 +5,15 @@ import lombok.Data;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author fzb
+ */
 @Data
 public class PaginationDTO {
-    private boolean showPrevious;
-    private boolean showFirstPage;
-    private boolean showNext;
-    private boolean showEndPage;
+    private Boolean showPrevious;
+    private Boolean showFirstPage;
+    private Boolean showNext;
+    private Boolean showEndPage;
     private Integer page;
     private List<Integer> pages = new ArrayList<>();
     private Integer totalPage;
@@ -19,17 +22,17 @@ public class PaginationDTO {
         this.page=page;
         this.totalPage=totalPage;
 
-        if (page==1) this.showPrevious=false;
-        else this.showPrevious=true;
+        if (page==1) {
+            this.showPrevious=false;
+        } else {
+            this.showPrevious=true;
+        }
 
-        if (page>4) this.showFirstPage=true;
-        else this.showFirstPage=false;
+        this.showFirstPage= page > 4;
 
-        if (page==totalPage) this.showNext=false;
-        else this.showNext=true;
+        this.showNext= !page.equals(totalPage);
 
-        if (page>totalPage-4) this.showEndPage=false;
-        else this.showEndPage=true;
+        this.showEndPage= page <= totalPage - 4;
 
         pages.add(page);
         for (int i = 1; i <= 3; i++) {

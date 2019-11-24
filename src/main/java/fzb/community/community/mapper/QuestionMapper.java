@@ -4,9 +4,13 @@ import fzb.community.community.model.Question;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
+/**
+ * @author fzb
+ */
 @Mapper
 public interface QuestionMapper {
 
@@ -24,9 +28,26 @@ public interface QuestionMapper {
     @Select("select count(1) from question")
     public int total();
 
-    @Select("select * from question limit #{index},#{size}")
-    List<Question> findPageAll(Integer index, Integer size);
+    /**
+     * 按更新时间查询
+     * @param index
+     * @param size
+     * @return
+     */
+    @Select("select * from question order by gmt_modified desc limit  #{index},#{size}")
+    List<Question> findPageAllOrderByModified(Integer index, Integer size);
 
+    /**
+     * 按用户查询
+     * @param creator
+     * @return
+     */
     @Select("select * from question where creator=#{creator}")
     List<Question> findByCreator(Long creator);
+
+    @Select("select * from question where id=#{id}")
+    Question selectById(Long id);
+
+    @Update("update question set view_count=view_count+1 where id=#{id}")
+    void UpdateViewCutById(Long id);
 }

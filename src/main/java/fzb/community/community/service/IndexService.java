@@ -12,6 +12,9 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author fzb
+ */
 @Service
 public class IndexService {
 
@@ -24,7 +27,7 @@ public class IndexService {
 
     public List<QuestionDTO> list(Integer page,Integer size){
         List<QuestionDTO> questionDTOList=new ArrayList<>();
-            List<Question> all = questionMapper.findPageAll((page-1)*size,size);
+            List<Question> all = questionMapper.findPageAllOrderByModified((page-1)*size,size);
             for (Question question:all){
                 QuestionDTO questionDTO=new QuestionDTO();
                 User byId = userMapper.findById(question.getCreator());

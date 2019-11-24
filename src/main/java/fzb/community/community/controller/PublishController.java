@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * @author fzb
+ */
 @Controller
 public class PublishController {
 

@@ -2,6 +2,9 @@ package fzb.community.community.model;
 
 import lombok.Data;
 
+import java.util.LinkedList;
+import java.util.List;
+
 @Data
 public class Question {
     private Long id;
@@ -14,4 +17,5 @@ public class Question {
     private Integer likeCount;
     private String tag;
     private String description;
+    public List<Integer> list=new LinkedList<>();
 }

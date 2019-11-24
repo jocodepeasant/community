@@ -41,4 +41,14 @@ public class QuestionService {
         }
                 return questionDTOS;
     }
+
+    public QuestionDTO getById(Long id) {
+        QuestionDTO questionDTO=new QuestionDTO();
+        Question question = questionMapper.selectById(id);
+        BeanUtils.copyProperties(question,questionDTO);
+        User byId = userMapper.findById(question.getCreator());
+        questionDTO.setUser(byId);
+        questionMapper.UpdateViewCutById(id);
+        return questionDTO;
+    }
 }

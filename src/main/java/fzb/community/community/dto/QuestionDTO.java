@@ -3,6 +3,9 @@ package fzb.community.community.dto;
 import fzb.community.community.model.User;
 import lombok.Data;
 
+/**
+ * @author fzb
+ */
 @Data
 public class QuestionDTO {
     private Long id;

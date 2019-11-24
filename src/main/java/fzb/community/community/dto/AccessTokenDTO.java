@@ -3,7 +3,8 @@ package fzb.community.community.dto;
 import lombok.Data;
 
 /**
- * 
+ *
+ * @author fzb
  */
 @Data
 public class AccessTokenDTO {
