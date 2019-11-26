@@ -10,6 +10,7 @@ import fzb.community.model.User;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,12 +23,22 @@ public class QuestionService {
 
     @Autowired
     private UserMapper userMapper;
-    /**
-     * 暂时只是插入
-     * @param question
-     */
+
     public void createOrUpdate(Question question){
-        questionMapper.Insert(question);
+        if (question.getId()==null) {
+            question.setGmtCreate(System.currentTimeMillis());
+            question.setGmtModified(System.currentTimeMillis());
+            questionMapper.Insert(question);
+        }
+        else {
+            Question question1 = questionMapper.selectById(question.getId());
+            if (question1 == null) {
+                throw new CustomizeException(CustomizeErrorCode.QUSETION_IS_DELETE);
+            } else {
+                question.setGmtModified(System.currentTimeMillis());
+                questionMapper.update(question);
+            }
+        }
     }
 
     public List<QuestionDTO> findQuestionsByCreator(Long creator){
