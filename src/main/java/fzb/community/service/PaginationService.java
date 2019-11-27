@@ -2,6 +2,7 @@ package fzb.community.service;
 
 import fzb.community.dto.PaginationDTO;
 import fzb.community.mapper.QuestionMapper;
+import fzb.community.model.QuestionExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +14,7 @@ public class PaginationService {
 
     public PaginationDTO pagination(Integer page){
         PaginationDTO paginationDTO=new PaginationDTO();
-        int total = questionMapper.total();
+        int total = (int) questionMapper.countByExample(new QuestionExample());
         total=total/10+1;
         paginationDTO.setPagination(total,page);
         return paginationDTO;

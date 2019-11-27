@@ -25,7 +25,7 @@ public class SessionInterceptor implements HandlerInterceptor {
             for (Cookie cookie : cookies
             ) {
                 if (cookie.getName().equals("GithubToken") ) {
-                    user = userService.findByToken(cookie.getValue());
+                    user = userService.findByToken(cookie.getValue()).get(0);
                     break;
                 }
             }
