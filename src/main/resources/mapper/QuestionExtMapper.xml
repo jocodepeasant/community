@@ -22,4 +22,10 @@
         from question
         order by #{GmtModified}
     </select>
+    <update id="incCommentCount" parameterType="fzb.community.model.Question">
+        update question
+        set comment_count=comment_count+1
+        where
+        id=#{id}
+    </update>
 </mapper>

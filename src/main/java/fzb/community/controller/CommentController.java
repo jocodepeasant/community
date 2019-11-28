@@ -1,7 +1,9 @@
 package fzb.community.controller;
 
 import fzb.community.dto.CommentCreateDTO;
+import fzb.community.dto.CommentDTO;
 import fzb.community.dto.ResultDTO;
+import fzb.community.enums.CommentTypeEnum;
 import fzb.community.exception.CustomizeErrorCode;
 import fzb.community.model.Comment;
 import fzb.community.model.User;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 public class CommentController {
@@ -41,5 +44,12 @@ public class CommentController {
         comment.setCommentator(user.getId());
         commentService.insert(comment, user);
         return ResultDTO.okOf();
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/comment/{id}",method = RequestMethod.GET)
+    public  ResultDTO<List<CommentDTO>> comments(@PathVariable(name = "id") Long id){
+        List<CommentDTO> commentDTOS=commentService.listByTargetId(id, CommentTypeEnum.SECOND_COMMENT);
+        return ResultDTO.okOf(commentDTOS);
     }
 }

@@ -7,4 +7,6 @@ import java.util.List;
 public interface QuestionExtMapper {
 
     List<Question> selOrdMt(Long gmtModified);
+
+    void incCommentCount(Question question);
 }
