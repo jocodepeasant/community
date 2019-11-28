@@ -1,5 +1,6 @@
 package fzb.community.controller;
 
+import fzb.community.cache.TagCache;
 import fzb.community.dto.QuestionDTO;
 import fzb.community.model.Question;
 import fzb.community.model.User;
@@ -47,6 +48,8 @@ public class PublishController {
         if (user == null || user.getId() == null) {
             model.addAttribute("msg", "用户未登录，请先登录");
         }
+
+        model.addAttribute("tags", TagCache.get());
         return "publish";
     }
 

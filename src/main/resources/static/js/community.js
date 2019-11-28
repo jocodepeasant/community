@@ -1,3 +1,6 @@
+/**
+ * 提交回复
+ */
 function post() {
     var questionId = $("#question_id").val();
     var content = $("#comment_content").val();
@@ -23,7 +26,7 @@ function comment2target(targetId, type, content) {
             if (response.code == 200) {
                 window.location.reload();
             } else {
-                if (response.code == 2004) {
+                if (response.code == 2003) {
                     var isAccepted = confirm(response.message);
                     if (isAccepted) {
                         window.open("https://github.com/login/oauth/authorize?client_id=2859958f9f059979ed3a&redirect_uri=" + document.location.origin + "/callback&scope=user&state=1");
@@ -106,6 +109,22 @@ function collapseComments(e) {
                 e.setAttribute("data-collapse", "in");
                 e.classList.add("active");
             });
+        }
+    }
+}
+
+function showSelectTag() {
+    $("#select-tag").show();
+}
+
+function selectTag(e) {
+    var value = e.getAttribute("data-tag");
+    var previous = $("#tag").val();
+    if (previous.indexOf(value) == -1) {
+        if (previous) {
+            $("#tag").val(previous + ',' + value);
+        } else {
+            $("#tag").val(value);
         }
     }
 }

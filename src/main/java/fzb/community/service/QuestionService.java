@@ -1,5 +1,6 @@
 package fzb.community.service;
 
+import fzb.community.dto.PaginationDTO;
 import fzb.community.dto.QuestionDTO;
 import fzb.community.exception.CustomizeErrorCode;
 import fzb.community.exception.CustomizeException;
@@ -8,6 +9,7 @@ import fzb.community.mapper.UserMapper;
 import fzb.community.model.Question;
 import fzb.community.model.QuestionExample;
 import fzb.community.model.User;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -72,4 +74,5 @@ public class QuestionService {
         questionMapper.updateByPrimaryKeySelective(updateQuestion);
         return questionDTO;
     }
+
 }

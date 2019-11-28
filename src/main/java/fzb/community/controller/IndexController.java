@@ -4,6 +4,7 @@ import fzb.community.dto.PaginationDTO;
 import fzb.community.dto.QuestionDTO;
 import fzb.community.service.IndexService;
 import fzb.community.service.PaginationService;
+import fzb.community.service.QuestionService;
 import fzb.community.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,18 +31,26 @@ public class IndexController {
     private UserService userService;
 
     @Autowired
+    private QuestionService questionService;
+
+    @Autowired
     private PaginationService paginationService;
 
     @GetMapping("/")
     public String hello(HttpServletRequest request,
                         Model model,
-                        @RequestParam(name = "page",defaultValue = "1") Integer page,
-                        @RequestParam(name="size",defaultValue = "10") Integer size) {
-        List<QuestionDTO> list = indexService.list(page,size);
+                        @RequestParam(name = "page", defaultValue = "1") Integer page,
+                        @RequestParam(name = "size", defaultValue = "10") Integer size,
+                        @RequestParam(name = "search", required = false) String search,
+                        @RequestParam(name = "sort", required = false) String sort,
+                        @RequestParam(name = "tag", required = false) String tag) {
+        List<QuestionDTO> list = indexService.list(page, size);
         model.addAttribute("list", list);
 
         PaginationDTO pagination = paginationService.pagination(page);
         model.addAttribute("pagination", pagination);
+
+
 
         return "index";
     }
