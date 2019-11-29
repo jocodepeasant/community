@@ -5,6 +5,7 @@ import fzb.community.dto.QuestionDTO;
 import fzb.community.model.Question;
 import fzb.community.model.User;
 import fzb.community.service.QuestionService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -79,6 +80,11 @@ public class PublishController {
         }
         if (tag == null || tag.trim().isEmpty()) {
             model.addAttribute("msg", "请输入至少一个标签");
+            return "publish";
+        }
+        if (StringUtils.isNotBlank(TagCache.filterInvalid(tag))){
+            model.addAttribute("tag",TagCache.filterInvalid(tag));
+            model.addAttribute("msg", "输入非法标签");
             return "publish";
         }
         Question question = new Question();
