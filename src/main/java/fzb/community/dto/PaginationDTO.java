@@ -9,7 +9,8 @@ import java.util.List;
  * @author fzb
  */
 @Data
-public class PaginationDTO {
+public class PaginationDTO<T> {
+    private List<T> data;
     private Boolean showPrevious;
     private Boolean showFirstPage;
     private Boolean showNext;

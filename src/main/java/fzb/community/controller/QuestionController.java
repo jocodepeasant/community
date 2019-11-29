@@ -1,7 +1,6 @@
 package fzb.community.controller;
 
 import fzb.community.dto.CommentDTO;
-import fzb.community.dto.GithubUser;
 import fzb.community.dto.QuestionDTO;
 import fzb.community.enums.CommentTypeEnum;
 import fzb.community.exception.CustomizeErrorCode;

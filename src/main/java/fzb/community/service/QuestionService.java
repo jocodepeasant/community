@@ -10,6 +10,7 @@ import fzb.community.model.Question;
 import fzb.community.model.QuestionExample;
 import fzb.community.model.User;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -75,4 +76,48 @@ public class QuestionService {
         return questionDTO;
     }
 
+    public PaginationDTO list(String search, String tag, String sort, Integer page, Integer size) {
+        PaginationDTO paginationDTO=new PaginationDTO();
+        int total = (int) questionMapper.countByExample(new QuestionExample());
+        total=total/10+1;
+        paginationDTO.setPagination(total,page);
+        List<QuestionDTO> questionDTOList=new ArrayList<>();
+        QuestionExample questionExample=new QuestionExample();
+        questionExample.setOrderByClause("gmt_modified DESC");
+        List<Question> all = questionMapper.selectByExampleWithRowbounds
+                (questionExample,new RowBounds((page-1)*size,size));
+        for (Question question:all){
+            QuestionDTO questionDTO=new QuestionDTO();
+            User byId = userMapper.selectByPrimaryKey(question.getCreator());
+            BeanUtils.copyProperties(question,questionDTO);
+            questionDTO.setUser(byId);
+            questionDTOList.add(questionDTO);
+        }
+        paginationDTO.setData(questionDTOList);
+        return paginationDTO;
+    }
+
+    public PaginationDTO list(Long userId, Integer page, Integer size) {
+        PaginationDTO paginationDTO=new PaginationDTO();
+        QuestionExample questionExample=new QuestionExample();
+        questionExample.createCriteria()
+                .andCreatorEqualTo(userId);
+        int total = (int) questionMapper.countByExample(questionExample);
+        total=total/10+1;
+        paginationDTO.setPagination(total,page);
+        List<QuestionDTO> questionDTOList=new ArrayList<>();
+//        QuestionExample questionExample=new QuestionExample();
+        questionExample.setOrderByClause("gmt_modified DESC");
+        List<Question> all = questionMapper.selectByExampleWithRowbounds
+                (questionExample,new RowBounds((page-1)*size,size));
+        for (Question question:all){
+            QuestionDTO questionDTO=new QuestionDTO();
+            User byId = userMapper.selectByPrimaryKey(question.getCreator());
+            BeanUtils.copyProperties(question,questionDTO);
+            questionDTO.setUser(byId);
+            questionDTOList.add(questionDTO);
+        }
+        paginationDTO.setData(questionDTOList);
+        return paginationDTO;
+    }
 }

@@ -1,8 +1,7 @@
 package fzb.community.controller;
 
-import fzb.community.dto.QuestionDTO;
+import fzb.community.dto.PaginationDTO;
 import fzb.community.model.User;
-import fzb.community.service.PaginationService;
 import fzb.community.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.*;
 
 /**
  * @author fzb
@@ -22,9 +20,6 @@ public class ProfileController {
 
     @Autowired
     private QuestionService questionService;
-
-    @Autowired
-    private PaginationService paginationService;
 
     @GetMapping("/profile/{action}")
     public String profile(@PathVariable(name = "action") String action,
@@ -37,8 +32,8 @@ public class ProfileController {
             return "redirect:/";
         }
         if (action.equals("questions")){
-            List<QuestionDTO> questionsByCreator = questionService.findQuestionsByCreator(user.getId());
-            model.addAttribute("questions", questionsByCreator);
+            PaginationDTO paginationDTO = questionService.list(user.getId(),page,size);
+            model.addAttribute("pagination", paginationDTO);
             model.addAttribute("section","questions");
             model.addAttribute("sectionName","我的提问");
         }
