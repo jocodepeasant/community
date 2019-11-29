@@ -1,5 +1,6 @@
 package fzb.community.controller;
 
+import fzb.community.cache.HotTagCache;
 import fzb.community.dto.PaginationDTO;
 import fzb.community.dto.QuestionDTO;
 import fzb.community.service.IndexService;
@@ -36,6 +37,9 @@ public class IndexController {
     @Autowired
     private PaginationService paginationService;
 
+    @Autowired
+    private HotTagCache hotTagCache;
+
     @GetMapping("/")
     public String hello(HttpServletRequest request,
                         Model model,
@@ -50,7 +54,7 @@ public class IndexController {
         PaginationDTO pagination = paginationService.pagination(page);
         model.addAttribute("pagination", pagination);
 
-
+        model.addAttribute("tags", hotTagCache.getHots());
 
         return "index";
     }

@@ -35,10 +35,12 @@
                 <!--标签-->
                 <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <span class="question-tag" th:each="tag : ${question.tag.split(',')}">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" th:if="${question.tag !=null}">
+                    <span class="question-tag"  th:each="tag : ${question.tag.split(',')}">
                         <a th:href="@{/(page=1,tag=${tag})}"
                            th:text="${tag}" class="community-tag"></a>
                     </span>
+                    </div>
                 </div>
 
                 <!--编辑-->
