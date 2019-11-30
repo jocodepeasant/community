@@ -2,6 +2,8 @@ package fzb.community.service;
 
 import fzb.community.dto.CommentDTO;
 import fzb.community.enums.CommentTypeEnum;
+import fzb.community.enums.NotificationStatusEnum;
+import fzb.community.enums.NotificationTypeEnum;
 import fzb.community.exception.CustomizeErrorCode;
 import fzb.community.exception.CustomizeException;
 import fzb.community.mapper.*;
@@ -35,8 +37,17 @@ public class CommentService {
     @Autowired
     private QuestionExtMapper questionExtMapper;
 
+    @Autowired
+    private NotificationMapper notificationMapper;
+
+    /**
+     * 添加评论并通知
+     *
+     * @param comment
+     * @param commentator
+     */
     @Transactional
-    public void insert(Comment comment, User user) {
+    public void insert(Comment comment, User commentator) {
         if (comment.getParentId() == null || comment.getParentId() == 0) {
             throw new CustomizeException(CustomizeErrorCode.TARGET_PARAM_NOT_FOUND);
         }
@@ -49,27 +60,33 @@ public class CommentService {
         if (comment.getType().equals(CommentTypeEnum.FIRST_COMMENT.getType())) {
 
             //查看问题状态
-            Question question=questionMapper.selectByPrimaryKey(comment.getParentId());
-            if (question==null){
+            Question question = questionMapper.selectByPrimaryKey(comment.getParentId());
+            if (question == null) {
                 throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
             }
             commentMapper.insertSelective(comment);
 
             //增加问题评论数
             questionExtMapper.incCommentCount(question);
+
+            if (!comment.getCommentator().equals(question.getCreator())) {
+                //创建通知
+                createNotify(comment, question.getCreator(), commentator.getName(),
+                        question.getTitle(), NotificationTypeEnum.REPLAY_QUESTION, question.getId());
+            }
         }
 
         //二级评论
-        else{
+        else {
             //查看评论状态
-            Comment dbComment=commentMapper.selectByPrimaryKey(comment.getParentId());
-            if(dbComment==null){
+            Comment dbComment = commentMapper.selectByPrimaryKey(comment.getParentId());
+            if (dbComment == null) {
                 throw new CustomizeException(CustomizeErrorCode.COMMENT_NOT_FOUND);
             }
 
             //查看问题状态
             Question question = questionMapper.selectByPrimaryKey(dbComment.getParentId());
-            if (question==null){
+            if (question == null) {
                 throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
             }
 
@@ -77,18 +94,38 @@ public class CommentService {
 
             //增加当前评论的评论数
             commentExtMapper.incCommentCount(dbComment);
+
+            if (!comment.getCommentator().equals(dbComment.getCommentator())) {
+                //创建通知
+                createNotify(comment, dbComment.getCommentator(), commentator.getName()
+                        , question.getTitle(), NotificationTypeEnum.REPLAY_COMMENT, question.getId());
+            }
         }
     }
 
+    private void createNotify(Comment comment, Long receiver, String notifierName,
+                              String outerTitle, NotificationTypeEnum notificationType, Long outerId) {
+        Notification notification = new Notification();
+        notification.setGmtCreate(System.currentTimeMillis());
+        notification.setNotifier(comment.getCommentator());
+        notification.setNotifierName(notifierName);
+        notification.setOuterid(outerId);
+        notification.setOuterTitle(outerTitle);
+        notification.setReceiver(receiver);
+        notification.setStatus(NotificationStatusEnum.UNREAD.getStatus());
+        notification.setType(notificationType.getType());
+        notificationMapper.insert(notification);
+    }
+
     public List<CommentDTO> listByTargetId(Long parentId, CommentTypeEnum commentType) {
-        CommentExample commentExample=new CommentExample();
+        CommentExample commentExample = new CommentExample();
         commentExample.createCriteria()
                 .andParentIdEqualTo(parentId)
                 .andTypeEqualTo(commentType.getType());
         commentExample.setOrderByClause("gmt_create desc");
         List<Comment> comments = commentMapper.selectByExample(commentExample);
 
-        if(comments.size()==0){
+        if (comments.size() == 0) {
             return new ArrayList<>();
         }
         // 获取去重的评论人
