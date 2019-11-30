@@ -18,4 +18,49 @@
         where
         id=#{id}
     </update>
+    <select id="countBySearch" parameterType="fzb.community.dto.QuestionQueryDTO" resultType="Integer">
+        select count(1)
+        from question
+        <where>
+            <if test="search!=null and search!=''">
+                and title regexp #{search}
+            </if>
+            <if test="tag!=null and tag!=''">
+                and tag regexp #{tag}
+            </if>
+            <if test="sort!=null and sort!='' and sort=='no'">
+                and comment_count=0
+            </if>
+            <if test="time!=null and time!=''">
+                and gmt_create>#{time}
+            </if>
+        </where>
+    </select>
+    <select id="selectBySearch" parameterType="fzb.community.dto.QuestionQueryDTO" resultMap="BaseResultMap">
+        select *
+        from question
+        <where>
+            <if test="search!=null and search!=''">
+                and title regexp #{search}
+            </if>
+            <if test="tag!=null and tag!=''">
+                and tag regexp #{tag}
+            </if>
+            <if test="sort!=null and sort!='' and sort=='no'">
+                and comment_count=0
+            </if>
+            <if test="time!=null and time!=''">
+                and gmt_create>#{time}
+            </if>
+        </where>
+        <choose>
+            <when test="sort != null and sort != '' and (sort == 'hot' || sort == 'hot7' || sort == 'hot30')">
+                order by comment_count desc
+            </when>
+            <otherwise>
+                order by gmt_create desc
+            </otherwise>
+        </choose>
+        limit #{pageOffSet},#{size}
+    </select>
 </mapper>

@@ -33,6 +33,9 @@ public class IndexController {
         model.addAttribute("pagination", paginationDTO);
 
         model.addAttribute("tags", hotTagCache.getHots());
+        model.addAttribute("sort",sort);
+        model.addAttribute("tag",tag);
+        model.addAttribute("search", search);
 
         return "index";
     }

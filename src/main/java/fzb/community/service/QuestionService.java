@@ -2,8 +2,11 @@ package fzb.community.service;
 
 import fzb.community.dto.PaginationDTO;
 import fzb.community.dto.QuestionDTO;
+import fzb.community.dto.QuestionQueryDTO;
+import fzb.community.enums.SortEnum;
 import fzb.community.exception.CustomizeErrorCode;
 import fzb.community.exception.CustomizeException;
+import fzb.community.mapper.QuestionExtMapper;
 import fzb.community.mapper.QuestionMapper;
 import fzb.community.mapper.UserMapper;
 import fzb.community.model.Question;
@@ -16,7 +19,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class QuestionService {
@@ -26,6 +31,9 @@ public class QuestionService {
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private QuestionExtMapper questionExtMapper;
 
     public void createOrUpdate(Question question) {
         if (question.getId() == null) {
@@ -77,19 +85,65 @@ public class QuestionService {
     }
 
     public PaginationDTO list(String search, String tag, String sort, Integer page, Integer size) {
-        PaginationDTO paginationDTO=new PaginationDTO();
-        int total = (int) questionMapper.countByExample(new QuestionExample());
-        total=total/10+1;
-        paginationDTO.setPagination(total,page);
-        List<QuestionDTO> questionDTOList=new ArrayList<>();
-        QuestionExample questionExample=new QuestionExample();
-        questionExample.setOrderByClause("gmt_modified DESC");
-        List<Question> all = questionMapper.selectByExampleWithRowbounds
-                (questionExample,new RowBounds((page-1)*size,size));
-        for (Question question:all){
-            QuestionDTO questionDTO=new QuestionDTO();
+
+        if (StringUtils.isNotBlank(search)) {
+            String[] tags = StringUtils.split(search, " ");
+            search = Arrays
+                    .stream(tags)
+                    .filter(StringUtils::isNotBlank)
+                    .map(t -> t.replace("+", "").replace("*", "").replace("?", ""))
+                    .filter(StringUtils::isNotBlank)
+                    .collect(Collectors.joining("|"));
+        }
+
+        QuestionQueryDTO questionQueryDTO = new QuestionQueryDTO();
+        questionQueryDTO.setSearch(search);
+        if (StringUtils.isNotBlank(tag)) {
+            tag = tag.replaceAll("\\*|\\+|\\?", "");
+            questionQueryDTO.setTag(tag);
+        }
+
+        for (SortEnum sortEnum:SortEnum.values()){
+            if(sortEnum.name().toLowerCase().equals(sort)){
+                questionQueryDTO.setSort(sort);
+
+                if(sortEnum==SortEnum.HOT7){
+                    questionQueryDTO.setTime(System.currentTimeMillis()-1000L * 60 * 60 * 24 * 7);
+                }
+                if (sortEnum==SortEnum.HOT30){
+                    questionQueryDTO.setTime(System.currentTimeMillis()-1000L * 60 * 60 * 24 * 30);
+                }
+                break;
+            }
+        }
+
+        Integer totalPage;
+        Integer totalCount =questionExtMapper.countBySearch(questionQueryDTO);
+
+        if (totalCount % size == 0) {
+            totalPage = totalCount / size;
+        } else {
+            totalPage = totalCount / size + 1;
+        }
+
+        if (page < 1) {
+            page = 1;
+        }
+        if (page > totalPage) {
+            page = totalPage;
+        }
+
+        questionQueryDTO.setSize(size);
+        questionQueryDTO.setPageOffSet(size*(page-1));
+        List<Question> questions=questionExtMapper.selectBySearch(questionQueryDTO);
+
+        PaginationDTO paginationDTO = new PaginationDTO();
+        paginationDTO.setPagination(totalPage, page);
+        List<QuestionDTO> questionDTOList = new ArrayList<>();
+        for (Question question : questions) {
+            QuestionDTO questionDTO = new QuestionDTO();
             User byId = userMapper.selectByPrimaryKey(question.getCreator());
-            BeanUtils.copyProperties(question,questionDTO);
+            BeanUtils.copyProperties(question, questionDTO);
             questionDTO.setUser(byId);
             questionDTOList.add(questionDTO);
         }
@@ -106,7 +160,6 @@ public class QuestionService {
         total=total/10+1;
         paginationDTO.setPagination(total,page);
         List<QuestionDTO> questionDTOList=new ArrayList<>();
-//        QuestionExample questionExample=new QuestionExample();
         questionExample.setOrderByClause("gmt_modified DESC");
         List<Question> all = questionMapper.selectByExampleWithRowbounds
                 (questionExample,new RowBounds((page-1)*size,size));
