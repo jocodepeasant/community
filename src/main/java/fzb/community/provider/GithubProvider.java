@@ -21,9 +21,11 @@ public class GithubProvider {
                 .build();
         try (Response response = client.newCall(request).execute()) {
             String string = response.body().string();
+            System.out.println("token"+string);
             String accessToken = string.split("&")[0].split("=")[1];
             return accessToken;
         } catch (Exception e) {
+            System.out.println("token五");
         }
         return null;
     }
@@ -36,10 +38,13 @@ public class GithubProvider {
 
             try (Response response = client.newCall(request).execute()) {
                 String string = response.body().string();
+                System.out.println("user"+string);
                 GithubUser githubUser = JSON.parseObject(string, GithubUser.class);
                 return githubUser;
             }
-            catch (Exception e){}
+            catch (Exception e){
+                System.out.println("user五");
+            }
             return null;
     }
 }
