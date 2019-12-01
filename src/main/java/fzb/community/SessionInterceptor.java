@@ -1,6 +1,7 @@
 package fzb.community;
 
 import fzb.community.model.User;
+import fzb.community.service.NotificationService;
 import fzb.community.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,9 @@ public class SessionInterceptor implements HandlerInterceptor {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private NotificationService notificationService;
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         Cookie[] cookies = request.getCookies();
@@ -31,7 +35,9 @@ public class SessionInterceptor implements HandlerInterceptor {
             }
         }
         if (user!=null && user.getToken()!=null){
-            request.getSession().setAttribute("GithubUser",user);
+            request.getSession().setAttribute("GithubUser", user);
+            Integer unreadCount=notificationService.unreadCount(user.getId());
+            request.getSession().setAttribute("unreadCount",unreadCount);
         }
         return true;
     }

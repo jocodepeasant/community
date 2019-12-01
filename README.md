@@ -1,5 +1,7 @@
-#互动社区  
-#基础命令
+##互动社区  
+
+
+##基础命令
 1.运行命令创建数据库脚本  
 ```sh
 mvn flyway:migrate 
@@ -8,11 +10,15 @@ mvn flyway:migrate
 ```sh
 mvn -Dmybatis.generator.overwrite=true mybatis-generator:generate
 ```
-#技术栈
+
+
+##技术栈
 ```sh
 bootstrap,spring,springboot,mybatis,mysql
 ```
-#功能
+
+
+##功能
 ```sh
 登录功能:github登录  
 提问功能  

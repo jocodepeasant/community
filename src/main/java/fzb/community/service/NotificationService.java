@@ -78,4 +78,14 @@ public class NotificationService {
         notificationDTO.setTypeName(NotificationTypeEnum.nameOfType(notification.getType()));
         return notificationDTO;
     }
+
+    public Integer unreadCount(Long id) {
+        NotificationExample notificationExample=new NotificationExample();
+        notificationExample.createCriteria()
+                .andReceiverEqualTo(id)
+                .andStatusEqualTo(NotificationStatusEnum.UNREAD.getStatus());
+        notificationExample.setOrderByClause("gmt_create desc");
+        Integer count = (int)notificationMapper.countByExample(notificationExample);
+        return count;
+    }
 }
