@@ -19,7 +19,6 @@ public class GithubProvider {
                 .url("https://github.com/login/oauth/access_token")
                 .post(body)
                 .build();
-        System.out.println(request);
         try (Response response = client.newCall(request).execute()) {
             String string = response.body().string();
             String accessToken = string.split("&")[0].split("=")[1];
