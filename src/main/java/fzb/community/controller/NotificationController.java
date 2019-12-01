@@ -1,6 +1,5 @@
 package fzb.community.controller;
 
-import com.sun.security.ntlm.NTLMException;
 import fzb.community.dto.NotificationDTO;
 import fzb.community.enums.NotificationTypeEnum;
 import fzb.community.model.User;
