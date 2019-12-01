@@ -50,9 +50,7 @@ public class GithubLoginController {
         accessTokenDTO.setCode(code);
         accessTokenDTO.setState(state);
         String accessToken = githubProvider.getAccessToken(accessTokenDTO);
-        System.out.println(accessToken);
         GithubUser githubUser = githubProvider.getUser(accessToken);
-        System.out.println(githubUser);
 
         //判断用户信息是否正确进行操作
         if (githubUser!=null && githubUser.getId()!=null) {
