@@ -2,10 +2,14 @@ package fzb.community.service;
 
 import fzb.community.dto.NotificationDTO;
 import fzb.community.dto.PaginationDTO;
+import fzb.community.enums.NotificationStatusEnum;
 import fzb.community.enums.NotificationTypeEnum;
+import fzb.community.exception.CustomizeErrorCode;
+import fzb.community.exception.CustomizeException;
 import fzb.community.mapper.NotificationMapper;
 import fzb.community.model.Notification;
 import fzb.community.model.NotificationExample;
+import fzb.community.model.User;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class NotificationService {
@@ -55,5 +60,22 @@ public class NotificationService {
         }
         paginationDTO.setData(notificationDTOS);
         return paginationDTO;
+    }
+
+    public NotificationDTO read(Long id, User user) {
+        Notification notification = notificationMapper.selectByPrimaryKey(id);
+        if (notification==null){
+            throw new CustomizeException(CustomizeErrorCode.NOTIFICATION_NOT_FOUND);
+        }
+        if (!Objects.equals(notification.getReceiver(),user.getId())){
+            throw new CustomizeException(CustomizeErrorCode.Permission_DENIED);
+        }
+        notification.setStatus(NotificationStatusEnum.READ.getStatus());
+        notificationMapper.updateByPrimaryKey(notification);
+
+        NotificationDTO notificationDTO=new NotificationDTO();
+        BeanUtils.copyProperties(notification, notificationDTO);
+        notificationDTO.setTypeName(NotificationTypeEnum.nameOfType(notification.getType()));
+        return notificationDTO;
     }
 }

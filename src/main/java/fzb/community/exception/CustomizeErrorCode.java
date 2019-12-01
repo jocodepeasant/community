@@ -13,6 +13,8 @@ public enum CustomizeErrorCode implements ICustomizeErrorCode {
     TYPE_PARAM_WRONG(2006, "评论类型错误或不存在"),
     COMMENT_NOT_FOUND(2007, "回复的评论不存在了，请重试"),
     INVALID_INPUT(2008, "无效地址，请确认请求参数是否正确"),
+    NOTIFICATION_NOT_FOUND(2007,"消息莫非是不翼而飞了？"),
+    Permission_DENIED(2008,"您没有当前操作的权限"),
     ;
 
 

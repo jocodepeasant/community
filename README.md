@@ -19,6 +19,7 @@ bootstrap,spring,springboot,mybatis,mysql
 回复功能  
 搜索功能  
 热度、时间排序以及消灭零回复  
+通知功能
 ```
 
 
