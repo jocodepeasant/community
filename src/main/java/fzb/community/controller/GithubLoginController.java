@@ -49,6 +49,7 @@ public class GithubLoginController {
         accessTokenDTO.setRedirect_uri(redirect_uri);
         accessTokenDTO.setCode(code);
         accessTokenDTO.setState(state);
+        System.out.println(accessTokenDTO);
         String accessToken = githubProvider.getAccessToken(accessTokenDTO);
         GithubUser githubUser = githubProvider.getUser(accessToken);
         System.out.println(githubUser);
