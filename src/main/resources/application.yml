@@ -1,0 +1,12 @@
+spring:
+  redis:
+    host: 192.168.62.131
+    port: 6379
+    jedis:
+      pool:
+        max-wait: 30000
+        max-active: 100
+        max-idle: 20
+        min-idle: 0
+    timeout: 3000
+    password: fzb8004568933

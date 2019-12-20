@@ -8,6 +8,7 @@ import fzb.community.exception.CustomizeErrorCode;
 import fzb.community.model.Comment;
 import fzb.community.model.User;
 import fzb.community.service.CommentService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
