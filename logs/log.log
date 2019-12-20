@@ -1,0 +1,28 @@
+2019-12-20 20:13:41.112  INFO 20068 --- [restartedMain] fzb.community.CommunityApplication       : Starting CommunityApplication on DESKTOP-GU18T4C with PID 20068 (started by fzb in D:\BaiduYunDownload\springmvc\springmvc\SpringMVC-02\代码\community)
+2019-12-20 20:13:41.117  INFO 20068 --- [restartedMain] fzb.community.CommunityApplication       : No active profile set, falling back to default profiles: default
+2019-12-20 20:13:41.198  INFO 20068 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2019-12-20 20:13:41.199  INFO 20068 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2019-12-20 20:13:43.187  INFO 20068 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 6060 (http)
+2019-12-20 20:13:43.197  INFO 20068 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-12-20 20:13:43.198  INFO 20068 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.27]
+2019-12-20 20:13:43.321  INFO 20068 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-12-20 20:13:43.321  INFO 20068 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2121 ms
+2019-12-20 20:13:44.443  INFO 20068 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-12-20 20:13:44.546  INFO 20068 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2019-12-20 20:13:44.851  INFO 20068 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2019-12-20 20:13:44.904  INFO 20068 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 6060 (http) with context path ''
+2019-12-20 20:13:44.907  INFO 20068 --- [restartedMain] fzb.community.CommunityApplication       : Started CommunityApplication in 4.425 seconds (JVM running for 6.099)
+2019-12-20 20:14:17.243  INFO 7104 --- [restartedMain] fzb.community.CommunityApplication       : Starting CommunityApplication on DESKTOP-GU18T4C with PID 7104 (started by fzb in D:\BaiduYunDownload\springmvc\springmvc\SpringMVC-02\代码\community)
+2019-12-20 20:14:17.247  INFO 7104 --- [restartedMain] fzb.community.CommunityApplication       : No active profile set, falling back to default profiles: default
+2019-12-20 20:14:17.319  INFO 7104 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2019-12-20 20:14:17.319  INFO 7104 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2019-12-20 20:14:19.147  INFO 7104 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 6060 (http)
+2019-12-20 20:14:19.158  INFO 7104 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-12-20 20:14:19.159  INFO 7104 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.27]
+2019-12-20 20:14:19.260  INFO 7104 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-12-20 20:14:19.261  INFO 7104 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1940 ms
+2019-12-20 20:14:20.182  INFO 7104 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-12-20 20:14:20.294  INFO 7104 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2019-12-20 20:14:20.573  INFO 7104 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2019-12-20 20:14:20.638  INFO 7104 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 6060 (http) with context path ''
+2019-12-20 20:14:20.648  INFO 7104 --- [restartedMain] fzb.community.CommunityApplication       : Started CommunityApplication in 4.02 seconds (JVM running for 5.648)

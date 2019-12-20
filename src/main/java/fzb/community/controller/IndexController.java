@@ -3,11 +3,13 @@ package fzb.community.controller;
 import fzb.community.cache.HotTagCache;
 import fzb.community.dto.PaginationDTO;
 import fzb.community.service.QuestionService;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.slf4j.Logger;
 
 /**
  * @author fzb
@@ -20,6 +22,8 @@ public class IndexController {
 
     @Autowired
     private HotTagCache hotTagCache;
+
+    public final static Logger logger = LoggerFactory.getLogger(IndexController.class);
 
     @GetMapping("/")
     public String hello(Model model,
