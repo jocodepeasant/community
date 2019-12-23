@@ -1,6 +1,6 @@
 spring:
   redis:
-    host: 192.168.62.131
+    host: 192.168.62.132
     port: 6379
     jedis:
       pool:
