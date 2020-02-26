@@ -1,26 +1,13 @@
-2019-12-23 18:41:12.800  INFO 9224 --- [main] fzb.community.CommunityApplicationTests  : Starting CommunityApplicationTests on DESKTOP-GU18T4C with PID 9224 (started by fzb in D:\BaiduYunDownload\springmvc\springmvc\SpringMVC-02\代码\community)
-2019-12-23 18:41:12.839  INFO 9224 --- [main] fzb.community.CommunityApplicationTests  : No active profile set, falling back to default profiles: default
-2019-12-23 18:41:16.971  INFO 9224 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
-2019-12-23 18:41:17.001  INFO 9224 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
-2019-12-23 18:41:17.055  INFO 9224 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 33ms. Found 0 repository interfaces.
-2019-12-23 18:41:18.325  INFO 9224 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'redisConfig' of type [fzb.community.RedisConfig$$EnhancerBySpringCGLIB$$67d1b4ce] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2019-12-23 18:41:18.338  INFO 9224 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2019-12-23 18:41:23.228  INFO 9224 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2019-12-23 18:41:23.492  INFO 9224 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
-2019-12-23 18:41:24.212  INFO 9224 --- [main] fzb.community.CommunityApplicationTests  : Started CommunityApplicationTests in 17.191 seconds (JVM running for 27.957)
-2019-12-23 18:41:25.423  INFO 9224 --- [main] io.lettuce.core.EpollProvider            : Starting without optional epoll library
-2019-12-23 18:41:25.424  INFO 9224 --- [main] io.lettuce.core.KqueueProvider           : Starting without optional kqueue library
-2019-12-23 18:41:28.489  INFO 9224 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
-2019-12-23 19:01:02.434  INFO 5320 --- [main] fzb.community.CommunityApplicationTests  : Starting CommunityApplicationTests on DESKTOP-GU18T4C with PID 5320 (started by fzb in D:\BaiduYunDownload\springmvc\springmvc\SpringMVC-02\代码\community)
-2019-12-23 19:01:02.474  INFO 5320 --- [main] fzb.community.CommunityApplicationTests  : No active profile set, falling back to default profiles: default
-2019-12-23 19:01:06.854  INFO 5320 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
-2019-12-23 19:01:06.858  INFO 5320 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
-2019-12-23 19:01:07.000  INFO 5320 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 39ms. Found 0 repository interfaces.
-2019-12-23 19:01:08.232  INFO 5320 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'redisConfig' of type [fzb.community.RedisConfig$$EnhancerBySpringCGLIB$$2c33b473] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2019-12-23 19:01:08.240  INFO 5320 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2019-12-23 19:01:11.838  INFO 5320 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2019-12-23 19:01:12.098  INFO 5320 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
-2019-12-23 19:01:13.000  INFO 5320 --- [main] fzb.community.CommunityApplicationTests  : Started CommunityApplicationTests in 13.262 seconds (JVM running for 21.154)
-2019-12-23 19:01:14.061  INFO 5320 --- [main] io.lettuce.core.EpollProvider            : Starting without optional epoll library
-2019-12-23 19:01:14.065  INFO 5320 --- [main] io.lettuce.core.KqueueProvider           : Starting without optional kqueue library
-2019-12-23 19:01:16.995  INFO 5320 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2019-12-26 14:05:33.732  INFO 18440 --- [main] fzb.community.CommunityApplicationTests  : Starting CommunityApplicationTests on DESKTOP-GU18T4C with PID 18440 (started by fzb in D:\BaiduYunDownload\springmvc\springmvc\SpringMVC-02\代码\community)
+2019-12-26 14:05:33.739  INFO 18440 --- [main] fzb.community.CommunityApplicationTests  : No active profile set, falling back to default profiles: default
+2019-12-26 14:05:37.550  INFO 18440 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode!
+2019-12-26 14:05:37.575  INFO 18440 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-12-26 14:05:37.728  INFO 18440 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 51ms. Found 0 repository interfaces.
+2019-12-26 14:05:39.097  INFO 18440 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'redisConfig' of type [fzb.community.RedisConfig$$EnhancerBySpringCGLIB$$8fcc0457] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-12-26 14:05:39.102  INFO 18440 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-12-26 14:05:42.619  INFO 18440 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-12-26 14:05:42.883  INFO 18440 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2019-12-26 14:05:44.090  INFO 18440 --- [main] fzb.community.CommunityApplicationTests  : Started CommunityApplicationTests in 11.846 seconds (JVM running for 14.968)
+2019-12-26 14:05:45.384  INFO 18440 --- [main] io.lettuce.core.EpollProvider            : Starting without optional epoll library
+2019-12-26 14:05:45.386  INFO 18440 --- [main] io.lettuce.core.KqueueProvider           : Starting without optional kqueue library
+2019-12-26 14:05:57.687  INFO 18440 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'

@@ -1,0 +1,24 @@
+spring:
+  redis:
+    host: 192.168.62.132
+    port: 6379
+    jedis:
+      pool:
+        max-wait: 30000
+        max-active: 100
+        max-idle: 20
+        min-idle: 0
+    timeout: 3000
+    password: fzb8004568933
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost/community?serverTimezone=Hongkong
+    username: root
+    password: fzb8004568933
+
+#Github配置
+Github:
+  client_id: 2891fa698a9bf3f5843a
+  client_secret: 523bb9d8654579f1bc3bcf8a479e9f4470fb92ce
+  redirect_uri: http://47.105.206.45:6060/callback

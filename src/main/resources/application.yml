@@ -1,12 +1,20 @@
 spring:
-  redis:
-    host: 192.168.62.132
-    port: 6379
-    jedis:
-      pool:
-        max-wait: 30000
-        max-active: 100
-        max-idle: 20
-        min-idle: 0
-    timeout: 3000
-    password: fzb8004568933
+  profiles:
+    active: dev
+
+server:
+  port: 6060
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+  type-aliases-package: fzb.community.mapper
+  mapper-locations: classpath:mapper/*.xml
+
+logging:
+  file:
+    max-size: 20MB
+    max-history: 3
+    path: ./logs/log.log
+  level:
+    root: info

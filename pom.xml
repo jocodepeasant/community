@@ -11,6 +11,7 @@
     <groupId>fzb.community</groupId>
     <artifactId>community</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
     <name>community</name>
     <description>community</description>
 
@@ -96,6 +97,7 @@
             <artifactId>commons-lang3</artifactId>
             <version>3.9</version>
         </dependency>
+
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
