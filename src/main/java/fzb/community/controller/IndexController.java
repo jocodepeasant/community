@@ -33,6 +33,8 @@ public class IndexController {
                         @RequestParam(name = "sort", required = false) String sort,
                         @RequestParam(name = "tag", required = false) String tag) {
 
+        logger.info(page.toString());
+        logger.info(size.toString());
         PaginationDTO paginationDTO=questionService.list(search,tag,sort,page,size);
         model.addAttribute("pagination", paginationDTO);
 

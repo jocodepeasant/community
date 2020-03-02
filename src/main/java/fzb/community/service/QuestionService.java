@@ -12,6 +12,7 @@ import fzb.community.mapper.UserMapper;
 import fzb.community.model.Question;
 import fzb.community.model.QuestionExample;
 import fzb.community.model.User;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.BeanUtils;
@@ -24,6 +25,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Slf4j
 public class QuestionService {
 
     @Autowired
@@ -129,9 +131,12 @@ public class QuestionService {
         if (page < 1) {
             page = 1;
         }
-        if (page > totalPage) {
+        if (page > totalPage  && totalPage!=0) {
             page = totalPage;
         }
+        log.info(String.valueOf(size*(page-1)));
+        log.info(String.valueOf(size));
+        log.info(String.valueOf(page));
 
         questionQueryDTO.setSize(size);
         questionQueryDTO.setPageOffSet(size*(page-1));
